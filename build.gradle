@@ -12,14 +12,15 @@ ext {
     scalaFullV = "${scalaMinorV}.$scalaPatchV"
     sparkFullV = "$sparkOpenV.$hdpV"
 
-    deps = [geomesaHBase  : "org.locationtech.geomesa:geomesa-hbase-spark-runtime_${scalaMinorV}:$geomesaV",
-            geomesaFsds   : "org.locationtech.geomesa:geomesa-fs-datastore_${scalaMinorV}:$geomesaV",
-            geomesaFsdsSpark   : "org.locationtech.geomesa:geomesa-fs-spark_${scalaMinorV}:$geomesaV",
-            geomesaFsdsOrc: "org.locationtech.geomesa:geomesa-fs-storage-orc_${scalaMinorV}:$geomesaV",
-            sparkCore     : "org.apache.spark:spark-core_${scalaMinorV}:$sparkFullV",
-            sparkSql      : "org.apache.spark:spark-sql_${scalaMinorV}:$sparkFullV",
-            scalaLib      : "org.scala-lang:scala-library:$scalaFullV",
-            zinc          : "com.typesafe.zinc:zinc:$zincV"
+    deps = [geomesaHBase      : "org.locationtech.geomesa:geomesa-hbase-spark-runtime_${scalaMinorV}:$geomesaV",
+            geomesaFsdsRuntime: "org.locationtech.geomesa:geomesa-fs-spark-runtime_${scalaMinorV}:$geomesaV",
+            geomesaFsds       : "org.locationtech.geomesa:geomesa-fs-datastore_${scalaMinorV}:$geomesaV",
+            geomesaFsdsSpark  : "org.locationtech.geomesa:geomesa-fs-spark_${scalaMinorV}:$geomesaV",
+            geomesaFsdsOrc    : "org.locationtech.geomesa:geomesa-fs-storage-orc_${scalaMinorV}:$geomesaV",
+            sparkCore         : "org.apache.spark:spark-core_${scalaMinorV}:$sparkFullV",
+            sparkSql          : "org.apache.spark:spark-sql_${scalaMinorV}:$sparkFullV",
+            scalaLib          : "org.scala-lang:scala-library:$scalaFullV",
+            zinc              : "com.typesafe.zinc:zinc:$zincV"
     ]
 
 }
@@ -28,58 +29,59 @@ configurations.all {
 
 }
 
-    repositories {
-        maven { url "https://repo.locationtech.org/content/groups/releases" }
-        maven { url "http://repo.boundlessgeo.com/main" }
-        maven { url "http://download.osgeo.org/webdav/geotools" }
-        maven { url "http://conjars.org/repo" }
-        jcenter()
-        maven { url "http://nexus-private.hortonworks.com/nexus/content/groups/public" }
-    }
+repositories {
+    maven { url "https://repo.locationtech.org/content/groups/releases" }
+    maven { url "http://repo.boundlessgeo.com/main" }
+    maven { url "http://download.osgeo.org/webdav/geotools" }
+    maven { url "http://conjars.org/repo" }
+    jcenter()
+    maven { url "http://nexus-private.hortonworks.com/nexus/content/groups/public" }
+}
 
-    apply plugin: 'scala'
-    apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'scala'
+apply plugin: 'com.github.johnrengelman.shadow'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-    dependencies {
+dependencies {
 
-        compile deps.geomesaHBase
-        compile deps.geomesaFsds
-        compile deps.geomesaFsdsSpark
-        compile deps.geomesaFsdsOrc
+//        compile deps.geomesaHBase
+//        compile deps.geomesaFsds
+//        compile deps.geomesaFsdsSpark
+//        compile deps.geomesaFsdsOrc
+    compile deps.geomesaFsdsRuntime
 
-        compileOnly deps.sparkCore
-        compileOnly deps.sparkSql
-        compileOnly deps.scalaLib
-        compileOnly deps.zinc
+    compileOnly deps.sparkCore
+    compileOnly deps.sparkSql
+    compileOnly deps.scalaLib
+    compileOnly deps.zinc
 
-    }
+}
 
-    shadowJar {
-        zip64 true
-        relocate 'shapeless', 'shadow.shapeless'
-        exclude 'META-INF/*.DSA'
-        exclude 'META-INF/*.RSA'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'NOTICE'
-        exclude 'LICENSE'
-        exclude 'LICENSE.txt'
-        exclude 'LICENSE-2.0.txt'
-        exclude 'webapps'
-        exclude 'w3c'
-        exclude 'lib/README.txt'
-        exclude 'core-default.xml'
-        exclude 'mapred-default.xml'
-        exclude 'casevariants.xml'
-        exclude 'categories.xml'
-        exclude 'Doxyfile'
-        exclude 'about.html'
-        exclude 'yarn-default.xml'
-        exclude 'yarn-version-info.properties'
-        exclude 'jump-workbench-properties.xml'
-    }
+shadowJar {
+    zip64 true
+    relocate 'shapeless', 'shadow.shapeless'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE.txt'
+    exclude 'META-INF/NOTICE'
+    exclude 'NOTICE'
+    exclude 'LICENSE'
+    exclude 'LICENSE.txt'
+    exclude 'LICENSE-2.0.txt'
+    exclude 'webapps'
+    exclude 'w3c'
+    exclude 'lib/README.txt'
+    exclude 'core-default.xml'
+    exclude 'mapred-default.xml'
+    exclude 'casevariants.xml'
+    exclude 'categories.xml'
+    exclude 'Doxyfile'
+    exclude 'about.html'
+    exclude 'yarn-default.xml'
+    exclude 'yarn-version-info.properties'
+    exclude 'jump-workbench-properties.xml'
+}
