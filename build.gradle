@@ -14,6 +14,7 @@ ext {
 
     deps = [geomesaHBase  : "org.locationtech.geomesa:geomesa-hbase-spark-runtime_${scalaMinorV}:$geomesaV",
             geomesaFsds   : "org.locationtech.geomesa:geomesa-fs-datastore_${scalaMinorV}:$geomesaV",
+            geomesaFsdsSpark   : "org.locationtech.geomesa:geomesa-fs-spark_${scalaMinorV}:$geomesaV",
             geomesaFsdsOrc: "org.locationtech.geomesa:geomesa-fs-storage-orc_${scalaMinorV}:$geomesaV",
             sparkCore     : "org.apache.spark:spark-core_${scalaMinorV}:$sparkFullV",
             sparkSql      : "org.apache.spark:spark-sql_${scalaMinorV}:$sparkFullV",
@@ -46,6 +47,7 @@ configurations.all {
 
         compile deps.geomesaHBase
         compile deps.geomesaFsds
+        compile deps.geomesaFsdsSpark
         compile deps.geomesaFsdsOrc
 
         compileOnly deps.sparkCore
