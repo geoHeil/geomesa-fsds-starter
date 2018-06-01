@@ -67,3 +67,45 @@ However, there are problems with ORC:
 ```
 java.lang.NoSuchMethodError: org.apache.orc.TypeDescription.createRowBatch()Lorg/apache/hadoop/hive/ql/exec/vector/VectorizedRowBatch
 ```
+
+```
+gradle dependencyInsight --dependency org.apache.orc                                                                                                                                                                                                [±master ●●]
+ 
+ > Task :dependencyInsight
+ org.apache.orc:orc-core:1.4.1
+    variant "runtime" [
+       Requested attributes not found in the selected variant:
+          org.gradle.usage = java-api
+    ]
+ +--- org.apache.orc:orc-mapreduce:1.4.1
+ |    +--- org.apache.spark:spark-sql_2.11:2.2.0.2.6.4.9-3
+ |    |    \--- compileClasspath
+ |    \--- org.locationtech.geomesa:geomesa-fs-storage-orc_2.11:2.0.1
+ |         \--- org.locationtech.geomesa:geomesa-fs-spark_2.11:2.0.1
+ |              \--- org.locationtech.geomesa:geomesa-fs-spark-runtime_2.11:2.0.1
+ |                   \--- compileClasspath
+ +--- org.apache.spark:spark-sql_2.11:2.2.0.2.6.4.9-3 (*)
+ \--- org.locationtech.geomesa:geomesa-fs-storage-orc_2.11:2.0.1 (*)
+ 
+ org.apache.orc:orc-mapreduce:1.4.1
+    variant "runtime" [
+       Requested attributes not found in the selected variant:
+          org.gradle.usage = java-api
+    ]
+ +--- org.apache.spark:spark-sql_2.11:2.2.0.2.6.4.9-3
+ |    \--- compileClasspath
+ \--- org.locationtech.geomesa:geomesa-fs-storage-orc_2.11:2.0.1
+      \--- org.locationtech.geomesa:geomesa-fs-spark_2.11:2.0.1
+           \--- org.locationtech.geomesa:geomesa-fs-spark-runtime_2.11:2.0.1
+                \--- compileClasspath
+ 
+ (*) - dependencies omitted (listed previously)
+ 
+ A web-based, searchable dependency report is available by adding the --scan option.
+ 
+ BUILD SUCCESSFUL in 0s
+ 1 actionable task: 1 executed
+                                                                                                                                                                                                                                                                      
+ geoheil@geoheils-MacBook ~/Downloads/geomesa-fsds-starter                                                                                                                                                                                                 [16:00:32] 
+ > $                                                                                        
+```
