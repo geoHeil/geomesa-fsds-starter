@@ -112,3 +112,21 @@ gradle dependencyInsight --dependency org.apache.orc                            
  geoheil@geoheils-MacBook ~/Downloads/geomesa-fsds-starter                                                                                                                                                                                                 [16:00:32] 
  > $                                                                                        
 ```
+
+
+> you can ignore those warnings, they're coming from the converter storage class
+  which you're not using
+  
+Unfortunately, something seems to be wrong:
+```
+ResultStage 1 (foreachPartition at FileSystemRDDProvider.scala:84) failed in 1.859 s due to Job aborted due to stage failure:
+```
+the spark job writing the data is cancelled
+```
++-------+---+----+
+|__fid__|dtg|geom|
++-------+---+----+
++-------+---+----+
+
+```
+and also reading the data being written (some files are actually being created) does not show any records
