@@ -10,6 +10,8 @@ import org.locationtech.geomesa.utils.interop.SimpleFeatureTypes
 import collection.JavaConversions._
 
 object Job1 extends App {
+  val format = "orc"
+//  val format = "parquet"
   val spark = SparkSession
     .builder()
     .config(new SparkConf().setAppName("dummy")
@@ -43,13 +45,13 @@ object Job1 extends App {
   val scheme = PartitionScheme(sft, "daily,z2-2bit", Map[String, String]())
   val schemeNew = PartitionScheme.addToSft(sft, scheme)
 
-  val datastore = DataStoreFinder.getDataStore(Map("fs.path" -> fsdsPathDummy, "fs.encoding" -> "orc"))
+  val datastore = DataStoreFinder.getDataStore(Map("fs.path" -> fsdsPathDummy, "fs.encoding" -> format))
   datastore.createSchema(sft)
 
   dummyGeo.write
     .format("geomesa")
     .option("fs.path", fsdsPathDummy)
-    .option("fs.encoding", "orc")
+    .option("fs.encoding", format)
     .option("geomesa.feature", sfName)
     .save
 
