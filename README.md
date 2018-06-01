@@ -65,6 +65,9 @@ after switching to geomesa-fs-spark-runtime this problem is gone.
 
 However, there are problems with ORC:
 ```
+2018-06-01 16:06:58 WARN  ConverterStorageFactory:37 - Couldn't create converter storage: java.lang.IllegalArgumentException: Must provide either simple feature type config or name
+java.lang.IllegalArgumentException: Must provide either simple feature type config or name
+        at org.locationtech.geomesa.fs.storage.converter.ConverterStorageFactory$$anonfun
 java.lang.NoSuchMethodError: org.apache.orc.TypeDescription.createRowBatch()Lorg/apache/hadoop/hive/ql/exec/vector/VectorizedRowBatch
 ```
 
