@@ -1,0 +1,6 @@
+.idea
+build
+.gradle
+metastore_db
+derby.log
+geomesa-fsds-starter.iml
