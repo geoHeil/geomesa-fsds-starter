@@ -34,3 +34,4 @@ Exception in thread "main" java.lang.NullPointerException
         at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
 
 ```
+NPE might be created at https://github.com/locationtech/geomesa/blob/master/geomesa-spark/geomesa-spark-sql/src/main/scala/org/locationtech/geomesa/spark/GeoMesaSparkSQL.scala#L177
